@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Form Auto-Submitter Premium</title>
+    <!-- Outfit & JetBrains Mono Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-bg"></div>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <span class="icon">⚡</span>
+                <h1>FormSphere <span class="badge">AutoFill v1.0</span></h1>
+            </div>
+            <p class="subtitle">Hệ thống mô phỏng & tự động hóa khảo sát biểu mẫu thông minh</p>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Left Panel: Form Control & Analyzer -->
+            <section class="panel control-panel">
+                <div class="card glass-card">
+                    <h3>1. Phân Tích Biểu Mẫu</h3>
+                    <div class="input-group">
+                        <label for="form-url">Nhập đường liên kết Google Form</label>
+                        <div class="url-input-wrapper">
+                            <input type="text" id="form-url" placeholder="https://docs.google.com/forms/d/e/..." value="https://docs.google.com/forms/d/e/1FAIpQLSfGb7_IfSwAjjkMHtt4NcCplgr2hv7vvCuAcrtRqJ8KvmRFAA/viewform">
+                            <button id="btn-analyze" class="btn btn-primary">Phân Tích</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card glass-card spacer" id="submit-card" style="display: none;">
+                    <h3>3. Tiến Hành Điền Form</h3>
+                    <div class="input-row">
+                        <div class="input-group flex-1">
+                            <label for="submit-count">Số lượng điền (Lần)</label>
+                            <input type="number" id="submit-count" value="100" min="1" max="1000">
+                        </div>
+                        <div class="input-group flex-1">
+                            <label>Trạng Thái</label>
+                            <div class="status-indicator" id="status-indicator">Chờ lệnh</div>
+                        </div>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span id="progress-text">Đã hoàn thành: 0% (0/0)</span>
+                            <span id="success-fail-text">Thành công: 0 | Lỗi: 0</span>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button id="btn-start" class="btn btn-success flex-1">Bắt Đầu Chạy</button>
+                        <button id="btn-stop" class="btn btn-danger" disabled>Dừng</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Configurations & Real-time logs -->
+            <section class="panel details-panel">
+                <!-- Configurator Card -->
+                <div class="card glass-card hide-scrollbar" id="config-card" style="display: none;">
+                    <div class="card-header">
+                        <h3>2. Cấu Hình Tỷ Lệ Đáp Án</h3>
+                        <div class="btn-presets">
+                            <button id="btn-realistic-random" class="btn-text" style="color: #10b981; margin-right: 10px;">Phân phối chuẩn (Khách quan)</button>
+                            <button id="btn-reset-weights" class="btn-text">Mặc định</button>
+                        </div>
+
+                    </div>
+                    <p class="config-desc">Thiết lập phương pháp điền cho từng câu hỏi. Bạn có thể chọn cố định hoặc ngẫu nhiên theo phần trăm trọng số.</p>
+                    <div class="questions-list" id="questions-list">
+                        <!-- Filled dynamically -->
+                    </div>
+                </div>
+
+                <!-- Logger Card -->
+                <div class="card glass-card term-card">
+                    <div class="card-header">
+                        <h3>Console logs</h3>
+                        <button id="btn-clear-logs" class="btn-text">Xóa Log</button>
+                    </div>
+                    <div class="console-box" id="console-box">
+                        <div class="log-line system">[System] Sẵn sàng phân tích biểu mẫu Google.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
